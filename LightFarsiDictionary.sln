@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightFarsiDictionary", "LightFarsiDictionary\LightFarsiDictionary.csproj", "{9022C322-261D-4DA9-8E63-AE5464CCE2E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightFarsiDictionary", "LightFarsiDic\LightFarsiDictionary.csproj", "{9022C322-261D-4DA9-8E63-AE5464CCE2E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
