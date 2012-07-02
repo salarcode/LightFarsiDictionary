@@ -126,12 +126,12 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(334, 251);
 			this.Controls.Add(this.txtWord);
-			this.Controls.Add(this.lblSite);
 			this.Controls.Add(this.btnSay);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
 			this.Controls.Add(this.txtMeaning);
 			this.Controls.Add(this.lblExactWord);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.lblSite);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
