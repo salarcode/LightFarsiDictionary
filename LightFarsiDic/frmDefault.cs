@@ -18,7 +18,9 @@ namespace LightFarsiDictionary
 			InitializeComponent();
 			_spellFa = new Hunspell();
 			_spellEn = new Hunspell();
+
 		}
+
 		const string ConnectionStringEnFa = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=dicenfa.db;Persist Security Info=True;Mode=Read";
 
 		#region variables
@@ -123,17 +125,19 @@ namespace LightFarsiDictionary
 		/// </summary>
 		string GetEnglishMeaning(OleDbConnection conn, string eng)
 		{
-			var cmd = new OleDbCommand();
-			string command = "SELECT  Farsi FROM EnglishToFarsi  WHERE  English = '" + eng + "'";
-			cmd.Connection = conn;
-			cmd.CommandText = command;
-
-			object result = cmd.ExecuteScalar();
-			if (result == null)
+			using (var cmd = new OleDbCommand())
 			{
-				return string.Empty;
+				string command = "SELECT  Farsi FROM EnglishToFarsi  WHERE  English = '" + eng + "'";
+				cmd.Connection = conn;
+				cmd.CommandText = command;
+
+				object result = cmd.ExecuteScalar();
+				if (result == null)
+				{
+					return string.Empty;
+				}
+				return result.ToString();
 			}
-			return result.ToString();
 		}
 
 		/// <summary>
@@ -141,17 +145,19 @@ namespace LightFarsiDictionary
 		/// </summary>
 		string GetFarsiMeaning(OleDbConnection conn, string fa)
 		{
-			var cmd = new OleDbCommand();
-			string command = "SELECT  English FROM FarsiToEnglish  WHERE  Farsi = '" + fa + "'";
-			cmd.Connection = conn;
-			cmd.CommandText = command;
-
-			object result = cmd.ExecuteScalar();
-			if (result == null)
+			using (var cmd = new OleDbCommand())
 			{
-				return string.Empty;
+				string command = "SELECT  English FROM FarsiToEnglish  WHERE  Farsi = '" + fa + "'";
+				cmd.Connection = conn;
+				cmd.CommandText = command;
+
+				object result = cmd.ExecuteScalar();
+				if (result == null)
+				{
+					return string.Empty;
+				}
+				return result.ToString();
 			}
-			return result.ToString();
 		}
 
 
@@ -258,21 +264,23 @@ namespace LightFarsiDictionary
 		string GetEnglishMeaningLikeBegin(OleDbConnection conn, string eng, out string foundEnglishWord)
 		{
 			foundEnglishWord = eng;
-			var cmd = new OleDbCommand();
-			string command = "SELECT  English,Farsi FROM EnglishToFarsi  WHERE  English LIKE '%" + eng + "'";
-			cmd.Connection = conn;
-			cmd.CommandText = command;
-
-			using (var reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
+			using (var cmd = new OleDbCommand())
 			{
-				if (reader.Read())
+				string command = "SELECT  English,Farsi FROM EnglishToFarsi  WHERE  English LIKE '%" + eng + "'";
+				cmd.Connection = conn;
+				cmd.CommandText = command;
+
+				using (var reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
 				{
-					foundEnglishWord = reader[0].ToString();
-					return reader[1].ToString();
-				}
-				else
-				{
-					return string.Empty;
+					if (reader.Read())
+					{
+						foundEnglishWord = reader[0].ToString();
+						return reader[1].ToString();
+					}
+					else
+					{
+						return string.Empty;
+					}
 				}
 			}
 		}
@@ -283,21 +291,23 @@ namespace LightFarsiDictionary
 		string GetEnglishMeaningLikeEnd(OleDbConnection conn, string eng, out string foundEnglishWord)
 		{
 			foundEnglishWord = eng;
-			var cmd = new OleDbCommand();
-			string command = "SELECT English,Farsi FROM EnglishToFarsi  WHERE  English LIKE '" + eng + "%'";
-			cmd.Connection = conn;
-			cmd.CommandText = command;
-
-			using (var reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
+			using (var cmd = new OleDbCommand())
 			{
-				if (reader.Read())
+				string command = "SELECT English,Farsi FROM EnglishToFarsi  WHERE  English LIKE '" + eng + "%'";
+				cmd.Connection = conn;
+				cmd.CommandText = command;
+
+				using (var reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
 				{
-					foundEnglishWord = reader[0].ToString();
-					return reader[1].ToString();
-				}
-				else
-				{
-					return string.Empty;
+					if (reader.Read())
+					{
+						foundEnglishWord = reader[0].ToString();
+						return reader[1].ToString();
+					}
+					else
+					{
+						return string.Empty;
+					}
 				}
 			}
 		}
