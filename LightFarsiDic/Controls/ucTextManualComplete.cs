@@ -84,12 +84,8 @@ namespace LightFarsiDictionary.Controls
 			if (v)
 			{
 				SetControlSuggestionHeight();
-				lstSuggest.Visible = v;
 			}
-			else
-			{
-				lstSuggest.Visible = v;
-			}
+			lstSuggest.Visible = v;
 		}
 
 		private void SetControlSuggestionHeight()
