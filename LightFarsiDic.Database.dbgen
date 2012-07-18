@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectDefinaton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectFileName>E:\Programming\C#.NET\LightFarsiDictionary\LightFarsiDic.Database.dbgen</ProjectFileName>
+  <GeneratorVersion>1</GeneratorVersion>
+  <ProjectName>LightFarsiDic</ProjectName>
+  <LastGeneration>2012-07-18T08:11:48.0478478+04:30</LastGeneration>
+  <GenerationPath>%PROJECT%\LightFarsiDic\Database</GenerationPath>
+  <CodeGenSettings>
+    <DefaultNamespace>LightFarsiDic.Database</DefaultNamespace>
+    <GenerateCustomizablePartial>false</GenerateCustomizablePartial>
+    <CodeGenPatternFile>%APP%\Patterns\NHibernate MapByCode Simple\NHibernate Simple MapByCode.dbpat</CodeGenPatternFile>
+    <SelectedPatterns>
+      <string>EntityObjectContext</string>
+      <string>Database Entity Objects</string>
+      <string>Database Entity Mapper</string>
+      <string>User Entity Mapper</string>
+      <string>User Entity Objects</string>
+      <string>BaseEntity</string>
+      <string>AppConfig</string>
+      <string>Iesi.Collections.dll</string>
+      <string>NHibernate.dll</string>
+    </SelectedPatterns>
+    <GenerateColumnsDescription>true</GenerateColumnsDescription>
+    <GenerateTablesForeignKeys>true</GenerateTablesForeignKeys>
+    <GenerateConstraintKeys>true</GenerateConstraintKeys>
+  </CodeGenSettings>
+  <DbSettions>
+    <DatabaseProvider>SQLite</DatabaseProvider>
+    <DatabaseName>dicenfa</DatabaseName>
+    <ServerName>E:\Programming\C#.NET\LightFarsiDictionary\LightFarsiDic\dicenfa.sqlite</ServerName>
+    <UseSqlAuthentication>false</UseSqlAuthentication>
+    <SqlUsername />
+    <SqlPassword />
+    <ConnectTimeout>30</ConnectTimeout>
+    <LastFetch>2012-07-16T21:00:56.6871345+04:30</LastFetch>
+    <OracleUseSysdbaRole>false</OracleUseSysdbaRole>
+    <PrefixForTables />
+    <PrefixForViews>vw</PrefixForViews>
+    <SuffixForTables />
+    <SuffixForViews />
+    <IgnoredPrefixes>
+      <string>tbl_</string>
+      <string>tbl</string>
+      <string>vw_</string>
+      <string>vw</string>
+    </IgnoredPrefixes>
+    <IgnoredSuffixes>
+      <string>tbl</string>
+      <string>_tbl</string>
+      <string>_vw</string>
+      <string>vw</string>
+    </IgnoredSuffixes>
+    <Table Selected="true">EnglishToFarsi</Table>
+    <Table Selected="true">FarsiToEnglish</Table>
+  </DbSettions>
+  <RenamingOptions>
+    <UnderlineWordDelimiter>false</UnderlineWordDelimiter>
+    <RemoveUnderline>
+      <Enabled>false</Enabled>
+      <Properties>true</Properties>
+      <Tables>true</Tables>
+    </RemoveUnderline>
+    <CaseChange>
+      <Enabled>false</Enabled>
+      <Properties>true</Properties>
+      <Tables>true</Tables>
+    </CaseChange>
+    <CaseChangeMode>Capitalize</CaseChangeMode>
+  </RenamingOptions>
+</ProjectDefinaton>
