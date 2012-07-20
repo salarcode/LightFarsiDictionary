@@ -42,7 +42,11 @@ namespace LightFarsiDictionary
 				return;
 			}
 			if (ifempty && txtWord.Text.Length == 0)
+			{
 				txtWord.Text = word;
+				txtWord.TextBox.SelectionStart = 0;
+				txtWord.TextBox.SelectionLength = word.Length;
+			}
 		}
 
 		/// <summary>
@@ -80,9 +84,9 @@ namespace LightFarsiDictionary
 				var loadText = new Action(
 					() =>
 					{
-						if (Program._warmUp != null)
+						if (Program._warmUp != null && !Program._warmUp.IsCompleted)
 						{
-							Program._warmUp.Join();
+							Program._warmUp.AsyncWaitHandle.WaitOne();
 						}
 
 						var spaceIndex = text.IndexOf(" ");

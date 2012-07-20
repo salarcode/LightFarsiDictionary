@@ -21,24 +21,25 @@ namespace LightFarsiDictionary
 			Application.Run(new frmMain());
 		}
 
-		internal static Thread _warmUp;
+		internal static IAsyncResult _warmUp;
 		/// <summary>
 		/// 
 		/// </summary>
 		static void WarmUpTheDatabase()
 		{
-			_warmUp = new Thread(() =>
-			{
-				try
+			_warmUp = new Action(
+				() =>
 				{
-					dicenfaSession.OpenStatelessSession().Dispose();
-				}
-				catch { }
-				_warmUp = null;
-			});
-			_warmUp.IsBackground = true;
-			_warmUp.Name = "WarmUp-NH";
-			_warmUp.Start();
+					try
+					{
+						dicenfaSession.OpenStatelessSession().Dispose();
+					}
+					catch
+					{
+					}
+					_warmUp = null;
+				})
+				.BeginInvoke(null, null);
 		}
 
 		static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
