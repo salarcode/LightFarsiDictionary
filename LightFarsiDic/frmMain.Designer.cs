@@ -113,7 +113,7 @@
 			// 
 			this.lnkSources.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lnkSources.AutoSize = true;
-			this.lnkSources.Location = new System.Drawing.Point(94, 232);
+			this.lnkSources.Location = new System.Drawing.Point(86, 232);
 			this.lnkSources.Name = "lnkSources";
 			this.lnkSources.Size = new System.Drawing.Size(67, 13);
 			this.lnkSources.TabIndex = 6;
