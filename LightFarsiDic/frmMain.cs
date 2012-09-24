@@ -7,8 +7,12 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using LightFarsiDic.Database.Entities;
+using LightFarsiDictionary.Classes;
+using LightFarsiDictionary.KeySniff;
+using LightFarsiDictionary.Properties;
 using NHibernate.Linq;
 using NHunspell;
+using TheBigBrother.Keylogger;
 
 namespace LightFarsiDictionary
 {
@@ -29,6 +33,7 @@ namespace LightFarsiDictionary
 		private bool _spellCheckLoaded = false;
 		private bool _changingDirection = false;
 		private const string notFoundMessage = "(یافت نشد)";
+		private bool _balloonTipShown = false;
 
 		#endregion
 
@@ -41,7 +46,16 @@ namespace LightFarsiDictionary
 				this.BeginInvoke(new Action<string, bool>(ChangeUserInputWord), word, ifempty);
 				return;
 			}
-			if (ifempty && txtWord.Text.Length == 0)
+			if (ifempty)
+			{
+				if (txtWord.Text.Length == 0)
+				{
+					txtWord.Text = word;
+					txtWord.TextBox.SelectionStart = 0;
+					txtWord.TextBox.SelectionLength = word.Length;
+				}
+			}
+			else
 			{
 				txtWord.Text = word;
 				txtWord.TextBox.SelectionStart = 0;
@@ -394,6 +408,24 @@ namespace LightFarsiDictionary
 		private void frmMain_Load(object sender, EventArgs e)
 		{
 			InitSpellCheck();
+			KeyboardHook.HookKeyboard(HookKeyboardCallback);
+			this.sysIcon.Icon = this.Icon;
+		}
+
+		private void HookKeyboardCallback(Keys key, KeyboardHook.KeyState keystate, string character)
+		{
+			if (KeyboardActivation.HookKeyboardProccess(key, keystate))
+			{
+				if (Settings.Default.KeyboardShortcut)
+					if (Clipboard.ContainsText())
+					{
+						ChangeUserInputWord("", false);
+						LoadTextFromClipboard();
+						this.Show();
+						this.Activate();
+						ActivateApp.ActivateApplication();
+					}
+			}
 		}
 
 		private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -422,7 +454,8 @@ namespace LightFarsiDictionary
 		{
 			if (e.KeyCode == Keys.F12)
 			{
-				SayWord();
+				if (Settings.Default.KeyboardTextToSpeech)
+					SayWord();
 			}
 		}
 
@@ -434,6 +467,55 @@ namespace LightFarsiDictionary
 		private void frmMain_Shown(object sender, EventArgs e)
 		{
 			LoadTextFromClipboard();
+		}
+
+		private void btnSettings_Click(object sender, EventArgs e)
+		{
+			using (var frm = new frmSettings())
+			{
+				frm.ShowDialog();
+			}
+		}
+
+		private void sysIcon_MouseUp(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				Show();
+			}
+		}
+
+		private void frmMain_VisibleChanged(object sender, EventArgs e)
+		{
+			if (this.Visible == false)
+			{
+				sysIcon.Visible = true;
+			}
+		}
+
+		private void mnuShow_Click(object sender, EventArgs e)
+		{
+			this.Show();
+		}
+
+		private void mnuExit_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+
+		private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (Settings.Default.SendToSysTray)
+				if (e.CloseReason == CloseReason.UserClosing)
+				{
+					e.Cancel = true;
+					this.Hide();
+					if (_balloonTipShown == false)
+					{
+						_balloonTipShown = true;
+						sysIcon.ShowBalloonTip(200);
+					}
+				}
 		}
 
 	}

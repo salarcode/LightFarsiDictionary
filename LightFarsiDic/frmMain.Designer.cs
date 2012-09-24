@@ -28,28 +28,23 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-			this.btnSay = new System.Windows.Forms.Button();
 			this.txtMeaning = new System.Windows.Forms.TextBox();
 			this.lblExactWord = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.lblSite = new System.Windows.Forms.LinkLabel();
 			this.lnkSources = new System.Windows.Forms.LinkLabel();
+			this.btnSettings = new System.Windows.Forms.Button();
+			this.btnSay = new System.Windows.Forms.Button();
+			this.sysIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.mnuSystray = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.mnuShow = new System.Windows.Forms.ToolStripMenuItem();
+			this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.txtWord = new LightFarsiDictionary.Controls.ucTextManualComplete();
+			this.mnuSystray.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// btnSay
-			// 
-			this.btnSay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnSay.Image = global::LightFarsiDictionary.Properties.Resources.Say16;
-			this.btnSay.Location = new System.Drawing.Point(282, 29);
-			this.btnSay.Name = "btnSay";
-			this.btnSay.Size = new System.Drawing.Size(40, 21);
-			this.btnSay.TabIndex = 2;
-			this.btnSay.UseVisualStyleBackColor = true;
-			this.btnSay.Click += new System.EventHandler(this.btnSay_Click);
-			this.btnSay.MouseEnter += new System.EventHandler(this.btnSay_MouseEnter);
 			// 
 			// txtMeaning
 			// 
@@ -61,7 +56,7 @@
 			this.txtMeaning.Name = "txtMeaning";
 			this.txtMeaning.ReadOnly = true;
 			this.txtMeaning.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.txtMeaning.Size = new System.Drawing.Size(310, 160);
+			this.txtMeaning.Size = new System.Drawing.Size(313, 160);
 			this.txtMeaning.TabIndex = 5;
 			// 
 			// lblExactWord
@@ -73,7 +68,7 @@
 			this.lblExactWord.Location = new System.Drawing.Point(14, 53);
 			this.lblExactWord.Name = "lblExactWord";
 			this.lblExactWord.ReadOnly = true;
-			this.lblExactWord.Size = new System.Drawing.Size(251, 14);
+			this.lblExactWord.Size = new System.Drawing.Size(254, 14);
 			this.lblExactWord.TabIndex = 3;
 			this.lblExactWord.TabStop = false;
 			// 
@@ -90,7 +85,7 @@
 			// 
 			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(265, 53);
+			this.label2.Location = new System.Drawing.Point(268, 53);
 			this.label2.Name = "label2";
 			this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.label2.Size = new System.Drawing.Size(60, 13);
@@ -121,6 +116,60 @@
 			this.lnkSources.Text = "open-source";
 			this.lnkSources.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSources_LinkClicked);
 			// 
+			// btnSettings
+			// 
+			this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnSettings.Image = global::LightFarsiDictionary.Properties.Resources.settings;
+			this.btnSettings.Location = new System.Drawing.Point(280, 28);
+			this.btnSettings.Name = "btnSettings";
+			this.btnSettings.Size = new System.Drawing.Size(45, 23);
+			this.btnSettings.TabIndex = 2;
+			this.btnSettings.UseVisualStyleBackColor = true;
+			this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+			this.btnSettings.MouseEnter += new System.EventHandler(this.btnSay_MouseEnter);
+			// 
+			// btnSay
+			// 
+			this.btnSay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnSay.Image = global::LightFarsiDictionary.Properties.Resources.Say16;
+			this.btnSay.Location = new System.Drawing.Point(229, 28);
+			this.btnSay.Name = "btnSay";
+			this.btnSay.Size = new System.Drawing.Size(45, 23);
+			this.btnSay.TabIndex = 2;
+			this.btnSay.UseVisualStyleBackColor = true;
+			this.btnSay.Click += new System.EventHandler(this.btnSay_Click);
+			this.btnSay.MouseEnter += new System.EventHandler(this.btnSay_MouseEnter);
+			// 
+			// sysIcon
+			// 
+			this.sysIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+			this.sysIcon.BalloonTipText = "از اینجا به دیکشنری دسترسی خواهید داشت";
+			this.sysIcon.ContextMenuStrip = this.mnuSystray;
+			this.sysIcon.Text = "English to Farsi / Farsi to English";
+			this.sysIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(this.sysIcon_MouseUp);
+			// 
+			// mnuSystray
+			// 
+			this.mnuSystray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuShow,
+            this.mnuExit});
+			this.mnuSystray.Name = "mnuSystray";
+			this.mnuSystray.Size = new System.Drawing.Size(127, 48);
+			// 
+			// mnuShow
+			// 
+			this.mnuShow.Name = "mnuShow";
+			this.mnuShow.Size = new System.Drawing.Size(126, 22);
+			this.mnuShow.Text = "نمایش فرم";
+			this.mnuShow.Click += new System.EventHandler(this.mnuShow_Click);
+			// 
+			// mnuExit
+			// 
+			this.mnuExit.Name = "mnuExit";
+			this.mnuExit.Size = new System.Drawing.Size(126, 22);
+			this.mnuExit.Text = "خروج";
+			this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
+			// 
 			// txtWord
 			// 
 			this.txtWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -129,7 +178,7 @@
 			this.txtWord.BackColor = System.Drawing.Color.Transparent;
 			this.txtWord.Location = new System.Drawing.Point(12, 29);
 			this.txtWord.Name = "txtWord";
-			this.txtWord.Size = new System.Drawing.Size(264, 21);
+			this.txtWord.Size = new System.Drawing.Size(211, 21);
 			this.txtWord.SuggestionVisible = false;
 			this.txtWord.TabIndex = 1;
 			this.txtWord.TextChanged += new System.EventHandler(this.txtWord_TextChanged);
@@ -138,8 +187,9 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(334, 251);
+			this.ClientSize = new System.Drawing.Size(337, 251);
 			this.Controls.Add(this.txtWord);
+			this.Controls.Add(this.btnSettings);
 			this.Controls.Add(this.btnSay);
 			this.Controls.Add(this.txtMeaning);
 			this.Controls.Add(this.lblExactWord);
@@ -155,10 +205,13 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "English to Farsi / Farsi to English";
 			this.Activated += new System.EventHandler(this.frmMain_Activated);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
 			this.Load += new System.EventHandler(this.frmMain_Load);
 			this.Shown += new System.EventHandler(this.frmMain_Shown);
+			this.VisibleChanged += new System.EventHandler(this.frmMain_VisibleChanged);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
+			this.mnuSystray.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -174,5 +227,10 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.LinkLabel lblSite;
 		private System.Windows.Forms.LinkLabel lnkSources;
+		private System.Windows.Forms.Button btnSettings;
+		private System.Windows.Forms.NotifyIcon sysIcon;
+		private System.Windows.Forms.ContextMenuStrip mnuSystray;
+		private System.Windows.Forms.ToolStripMenuItem mnuShow;
+		private System.Windows.Forms.ToolStripMenuItem mnuExit;
 	}
 }
