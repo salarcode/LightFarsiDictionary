@@ -15,12 +15,23 @@ namespace LightFarsiDictionary
 		static void Main()
 		{
 			Application.ThreadException += Application_ThreadException;
-			WarmUpTheDatabase();
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new frmMain());
+			if (!IsAnotherInstanceRunning(Application.ProductName))
+			{
+				WarmUpTheDatabase();
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+				PrcMessaging.StartPrcMessaging();
+				_mainForm = new frmMain();
+				Application.Run(_mainForm);
+			}
+			else
+			{
+				PrcMessaging.StartPrcMessaging();
+				PrcMessaging.SendCommand(PrcMessaging.Cmd_ShowUp);
+			}
 		}
 
+		static frmMain _mainForm;
 		internal static IAsyncResult _warmUp;
 		/// <summary>
 		/// 
@@ -45,6 +56,40 @@ namespace LightFarsiDictionary
 		static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
 		{
 			MessageBox.Show(e.Exception.ToString(), "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+		}
+
+		private static Mutex _mutex;
+		internal static bool IsAnotherInstanceRunning(string name)
+		{
+			// code to ensure that only one copy of the software is running.
+			try
+			{
+				_mutex = Mutex.OpenExisting(name);
+				return true;
+			}
+			catch
+			{
+				try
+				{
+					//since we didn’t find a mutex with that name, create one
+					_mutex = new Mutex(true, name);
+				}
+				catch (Exception)
+				{
+					// So, the mutex is already open but it is not accesable!
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public static void ShowUp()
+		{
+			if (_mainForm == null)
+				return;
+			_mainForm.WindowState = FormWindowState.Normal;
+			_mainForm.Show();
+			_mainForm.Activate();
 		}
 	}
 }

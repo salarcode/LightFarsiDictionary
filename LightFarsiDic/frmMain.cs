@@ -482,6 +482,7 @@ namespace LightFarsiDictionary
 			if (e.Button == MouseButtons.Left)
 			{
 				Show();
+				Focus();
 			}
 		}
 
